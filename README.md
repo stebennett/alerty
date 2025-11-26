@@ -2,6 +2,8 @@
 
 Internal SaaS web application for raising incidents in Grafana IRM. The app provides a simple UI for internal teams to quickly raise incidents, routing to the correct operations teams based on application/capability selections and associated tags.
 
+![Incident Bridge Screenshot](screenshot.png)
+
 ## Features
 
 - **Tree-based Selection**: Select applications and capabilities with tri-state checkboxes
