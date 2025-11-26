@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GRAFANA_IRM_BASE_URL=${GRAFANA_IRM_BASE_URL:-https://grafana.example.com}
+      - GRAFANA_IRM_API_TOKEN=${GRAFANA_IRM_API_TOKEN:-}
+      - DATABASE_URL=sqlite:///./data/incident_bridge.db
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  data:
